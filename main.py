@@ -39,7 +39,10 @@ def build_image():
         client.images.build(path='container', tag='code_executor')
 
 def start_container(code):
-    output = client.containers.run("code_executor:latest", f"python3.8 - << {code}", detach=False, environment=open('envs.txt', 'r').read().split('\n'))
+    with open("code/python_code_for_execution.py", "w") as f:
+        f.write(code)
+    output = client.containers.run("code_executor:latest", f"python3.8 /code/python_code_for_execution.py", detach=False, environment=open('envs.txt', 'r').read().split('\n'),
+                                   volumes={"/home/spot/robonomics-remote-launch/code": {'bind': '/code', 'mode': 'rw'}})
     print('Code executed')
     print('Output:\n___________')
     print(output)

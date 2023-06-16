@@ -15,3 +15,4 @@ Pillow
 pygame
 pyopengl==3.1.5
 pyvirtualdisplay
+setuptools
