@@ -1,0 +1,4 @@
+robonomics-interface==1.0.5
+substrate-interface>=1.2.5,<2
+requests
+docker
