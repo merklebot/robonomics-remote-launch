@@ -39,7 +39,7 @@ def build_image():
         client.images.build(path='container', tag='code_executor')
 
 def start_container(code):
-    output = client.containers.run("code_executor-splines", f"python3.8 < {code}", detach=False, environment=open('envs.txt', 'r').read().split('\n'))
+    output = client.containers.run("code_executor:latest", f"python3.8 - << {code}", detach=False, environment=open('envs.txt', 'r').read().split('\n'))
     print('Code executed')
     print('Output:\n___________')
     print(output)

@@ -1,4 +1,4 @@
 import requests
 import bosdyn.client
 res = requests.get('google.com')
-print(res.text)
+print(res.text, flush=True)
