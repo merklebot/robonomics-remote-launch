@@ -1,4 +1,5 @@
 import os
+import traceback
 import robonomicsinterface as RI
 import requests
 import docker
@@ -41,14 +42,16 @@ def build_image():
 def start_container(code):
     with open("code/python_code_for_execution.py", "w") as f:
         f.write(code)
-    output = client.containers.run("code_executor:latest", f"python3.8 /code/python_code_for_execution.py", detach=False, environment=open('envs.txt', 'r').read().split('\n'),
-                                   volumes={"/home/spot/robonomics-remote-launch/code": {'bind': '/code', 'mode': 'rw'}})
-    print('Code executed')
-    print('Output:\n___________')
-    print(output)
-    print('___________')
-    return output
-
+    try:
+        output = client.containers.run("code_executor:latest", f"python3.8 /code/python_code_for_execution.py", detach=False, environment=open('envs.txt', 'r').read().split('\n'),
+                                       volumes={"/home/spot/robonomics-remote-launch/code": {'bind': '/code', 'mode': 'rw'}})
+        print('Code executed')
+        print('Output:\n___________')
+        print(output)
+        print('___________')
+        return output
+    except:
+        traceback.print_exc()
 def main():
     print('Getting image...')
     build_image()
