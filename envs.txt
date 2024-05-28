@@ -1,4 +1,0 @@
-SEED=la la la la
-SPOT_USERNAME=student
-SPOT_PASSWORD=password
-SPOT_IP=192.168.50.3

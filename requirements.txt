@@ -1,4 +1,4 @@
-robonomics-interface==1.0.5
+robonomics-interface
 substrate-interface>=1.2.5,<2
 requests
-docker
+pinata-python
